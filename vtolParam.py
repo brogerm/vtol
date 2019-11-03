@@ -42,7 +42,7 @@ tr_z = 10 * tr_th
 zeta_z = 0.707
 
 # --------------------------
-#           Inner Loop
+#           Outer Loop
 # --------------------------
 # coefficients for desired inner loop
 wn_th = 2.2/tr_th
@@ -78,6 +78,13 @@ alpha0_h = wn_h**2
 
 kd_h = alpha1_h * (mc + 2 * mr)
 kp_h = alpha0_h * (mc + 2 * mr)
+
+# saturation limits
+tau_max = 5.0  # Max torque, Nm
+
+# dirty derivative parameters
+sigma = 0.05  # cutoff freq for dirty derivative
+beta = (2.0*sigma-Ts)/(2.0*sigma+Ts)  # dirty derivative gain
 
 print('DC_gain', DC_gain)
 print('kp_th: ', kp_th)
