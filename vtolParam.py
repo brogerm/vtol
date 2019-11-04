@@ -80,7 +80,8 @@ kd_h = alpha1_h * (mc + 2 * mr)
 kp_h = alpha0_h * (mc + 2 * mr)
 
 # saturation limits
-tau_max = 5.0  # Max torque, Nm
+F_max = 100.0  # Max Force, N
+tau_max = 100.0  # Max Torque, N-m
 
 # dirty derivative parameters
 sigma = 0.05  # cutoff freq for dirty derivative

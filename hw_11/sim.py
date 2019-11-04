@@ -12,8 +12,8 @@ from vtolDynamics import vtolDynamics
 # instantiate reference input classes
 vtol = vtolDynamics()
 ctrl = Controller()
-z_reference = signalGenerator(amplitude=3, frequency=0.08)
-h_reference = signalGenerator(amplitude=2, frequency=0.1)
+z_reference = signalGenerator(amplitude=2, frequency=0.08)
+h_reference = signalGenerator(amplitude=1, frequency=0.05)
 
 # instantiate the simulation plots and animation
 dataPlot = plotData()
@@ -28,7 +28,7 @@ while t < P.t_end:  # main simulation loop
     # Propagate dynamics in between plot samples
     t_next_plot = t + P.t_plot
     while t < t_next_plot:  # updates control and dynamics at faster simulation rate
-        u = ctrl.update(z_r, h_r, vtol.states())
+        u = ctrl.u([z_r[0], h_r[0]], vtol.states())
         vtol.propagateDynamics([u[0], u[1]])  # Propagate the dynamics
         t = t + P.Ts  # advance time by Ts
 
