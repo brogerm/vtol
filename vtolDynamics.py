@@ -23,7 +23,7 @@ class vtolDynamics:
         # that represents alpha*100 % of the parameter, i.e., alpha = 0.2, means that the parameter
         # may change by up to 20%.  A different parameter value is chosen every time the simulation
         # is run.
-        alpha = 0.2  # Uncertainty parameter
+        alpha = 0.0  # Uncertainty parameter
         self.ml = P.ml * (1+2*alpha*np.random.rand()-alpha)  # Mass of the left rotor, kg
         self.mc = P.mc * (1+2*alpha*np.random.rand()-alpha)  # Mass of the center pod, kg
         self.mr = P.mr * (1+2*alpha*np.random.rand()-alpha)  # Mass of the right rotor, kg
