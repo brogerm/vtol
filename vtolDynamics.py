@@ -23,7 +23,7 @@ class vtolDynamics:
         # that represents alpha*100 % of the parameter, i.e., alpha = 0.2, means that the parameter
         # may change by up to 20%.  A different parameter value is chosen every time the simulation
         # is run.
-        alpha = 0.0  # Uncertainty parameter
+        alpha = 0.2  # Uncertainty parameter
         self.ml = P.ml * (1+2*alpha*np.random.rand()-alpha)  # Mass of the left rotor, kg
         self.mc = P.mc * (1+2*alpha*np.random.rand()-alpha)  # Mass of the center pod, kg
         self.mr = P.mr * (1+2*alpha*np.random.rand()-alpha)  # Mass of the right rotor, kg
@@ -49,6 +49,11 @@ class vtolDynamics:
         '''
             Return xdot = f(x,u), the derivatives of the continuous states, as a matrix
         '''
+        # Disturbances
+        wind = 1.0
+        altitude_dist = 1.0
+
+
         # re-label states and inputs for readability
         z = state.item(0)
         h = state.item(1)
@@ -59,11 +64,13 @@ class vtolDynamics:
         F = u[0]
         tau = u[1]
 
+        zdot = zdot + wind
+
         fr = 1/2 * F + 1/(2 * self.d) * tau
         fl = 1/2 * F - 1/(2 * self.d) * tau
         # The equations of motion.
         zddot = (-(fl + fr)*np.sin(theta)-self.b * zdot) / (self.mc + 2 * self.ml)
-        hddot = 1/(self.mc + 2 * self.ml) * ((fl + fr)*np.cos(theta) - (self.mc + 2 * self.mr) * self.g)
+        hddot = 1/(self.mc + 2 * self.ml) * ((fl + fr)*np.cos(theta) - (self.mc + 2 * self.mr) * self.g) + altitude_dist
         thetaddot = 1/(self.Jc + 2 * self.ml * self.d**2) * ((fr - fl) * self.d)
         x1dot = zdot
         x2dot = hdot
