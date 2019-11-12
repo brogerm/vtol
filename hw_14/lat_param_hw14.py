@@ -20,7 +20,7 @@ wn_z = 2.2/tr_z
 zeta_th = 0.707
 zeta_z = 0.707
 z_integrator_pole = -3.0
-dist_obsv_pole = -5.0         # pole for disturbance observer
+dist_obsv_pole = -1.8         # pole for disturbance observer
 
 # pick observer poles
 tr_th_obs = tr_th/5.0

@@ -15,8 +15,8 @@ from plotObserverData import plotObserverData
 vtol = vtolDynamics()
 lon_ctrl = LonController()
 lat_ctrl = LatController()
-z_reference = signalGenerator(amplitude=2, frequency=0.1)
-h_reference = signalGenerator(amplitude=1, frequency=0.06)
+z_reference = signalGenerator(amplitude=2, frequency=0.08)
+h_reference = signalGenerator(amplitude=1, frequency=0.05)
 
 # set disturbance input
 force_disturbance = 1.0
